@@ -212,7 +212,6 @@ Para **cada caso de uso**, utilize o template abaixo:
 @startuml
 start
 :Comeca registro da compra;
-:Executa **UC10**;
 if (Tem o fornecedor?) then (nao)
   :Executa **UC02**;
 else (sim)
@@ -224,6 +223,9 @@ endif
 :Termina de lançar a compra;
 stop
 @enduml
+
+### diagrama
+<img width="197" height="489" alt="image" src="https://github.com/user-attachments/assets/d2030331-b217-4107-a2e5-892e1361acd7" />
 
 ---
 
@@ -245,6 +247,11 @@ start
 
 stop
 @enduml
+
+
+### diagrama
+
+<img width="231" height="193" alt="image" src="https://github.com/user-attachments/assets/8ed84d7c-955b-495c-8258-f7cbcc937945" />
 
 ---
 
@@ -268,6 +275,9 @@ start
 stop
 @enduml
 
+### diagrama
+
+<img width="241" height="248" alt="image" src="https://github.com/user-attachments/assets/e96a313e-71e7-4c1e-8464-418449500fec" />
 
 ----
 
@@ -290,6 +300,9 @@ start
 :envia para o financeiro;
 stop
 @enduml
+
+
+<img width="166" height="248" alt="image" src="https://github.com/user-attachments/assets/2de453ad-9455-493f-b01e-5f4789eab29d" />
 
 ---
 
@@ -314,6 +327,9 @@ else (nao)
 endif
 stop
 @enduml
+
+
+<img width="203" height="341" alt="image" src="https://github.com/user-attachments/assets/f6601537-d08e-4f0b-b5dc-1cdc57e47905" />
 
 ---
 
@@ -340,3 +356,5 @@ else (nao)
 endif
 stop
 @enduml
+
+<img width="355" height="312" alt="image" src="https://github.com/user-attachments/assets/534b26fb-79cc-4604-a99b-2c674262734e" />
