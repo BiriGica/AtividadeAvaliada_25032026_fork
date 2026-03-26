@@ -198,17 +198,145 @@ Para **cada caso de uso**, utilize o template abaixo:
 ### Fluxo Principal
 1.  o gerente inicia a compra 
 2.  o sistema verifica se o gerente está cadastrado
-3.  
-4.  
+3.  O gerente escolhe o fornecedor de uqe comprou
+4.  Ele adiciona os produtos e suas informaçoes
+   
 
 ### Fluxos Alternativos / Exceções
-- FA01 —  
-- FA02 —  
+- FA01 — Se não encontrar o fornecedor, vai para o caso de uso 2
+- FA02 - Se o produto for novo, vai para o 1
 
 ### Relacionamentos
-- **Include:** (listar quando aplicável)  
-- **Extend:** (listar quando aplicável)  
+- **Extend:** UC01, UC02
+
+@startuml
+start
+:Comeca registro da compra;
+:Executa **UC10**;
+if (Tem o fornecedor?) then (nao)
+  :Executa **UC02**;
+else (sim)
+endif
+if (Tem o produto?) then (nao)
+  :Executa **UC01**;
+else (sim)
+endif
+:Termina de lançar a compra;
+stop
+@enduml
+
+---
+
+## **UC05 — Atualizar o estoque atual
+**Ator(es):** Sistema
+**Descrição:** Atualiza automaticamente o estoque da farmácia quando uma compra é feita 
+**Pré-condições:**  uma compra tem que ter sido feita
+**Pós-condições:**  o estoque fica com a quantidade certa de produtos
+
+### Fluxo Principal
+1.  O sistema pega os itens que foram comprados
+2.  verifica qual unidade comprou 
+3.  soma com o que já tem em estoque
+   
+@startuml
+start
+:Puxa os itens comprados;
+:Soma as quantidades la no banco;
+
+stop
+@enduml
+
+---
+
+## **UC06 — Atualizar o estoque atual
+**Ator(es):** Sistema
+**Descrição:** manda uma notificação quando o estoqeu está baixo, avisando
+**Pré-condições:**  o estoque de algum produto ficar muito baixo
+**Pós-condições:**  o aletrta fica salvo no sistema
+
+### Fluxo Principal
+1.  o sistema percebe uqe o estoqeu do produto está baixo
+2.  manda a notificação
+3.  salva a notificação
 
 
+@startuml
+start
+:Acha produto com quantidade critico;
+:Manda notificacao na tela;
+:Guarda no historico;
+stop
+@enduml
 
 
+----
+
+## **UC07 — Enviar o valor da compra para o setor financeiro
+**Ator(es):** Sistema
+**Descrição:** pega o valor da compra e envia para o setor financeiro
+**Pré-condições:**  a compra precisa ter sido realizada
+**Pós-condições:**  uma conta a pagar é feita pelo financeiro
+
+### Fluxo Principal
+1.  o sistema pega o valor da compra
+2.  pega os dados do fornecedor e produto
+3.  cria uma conta a pagar
+4.  envia para o setor financeiro
+
+@startuml
+start
+:Calcula total da conta;
+:Gera a Conta a pagar;
+:envia para o financeiro;
+stop
+@enduml
+
+---
+
+## **UC08 — Mostrar as contas a pagar
+**Ator(es):** setor financeiro
+**Descrição:** o setor entra para ver os boletos e valores das compras
+**Pré-condições:**  o usuario do fincanceiro tem que estar logado
+**Pós-condições:**  uma lista de contas aparece
+
+### Fluxo Principal
+1.  responsável entra na parte de contas a pagar
+2.  o sistema mostra o que está em aberto 
+3.  mostra a lista na tela
+
+@startuml
+start
+:Financeiro abre a tela;
+:Sistema procura as contas;
+if (Achou a conta?) then (sim)
+  :Mostra a tabela na tela;
+else (nao)
+endif
+stop
+@enduml
+
+---
+
+## **UC10 — Autenticar o gerente
+**Ator(es):** Gerente
+**Descrição:** tela de login para verificar se é mesmo o gerente
+**Pré-condições:**  o usuario tem que estar cadastrado
+**Pós-condições:**  iniciar sessão
+
+### Fluxo Principal
+1.  o sistema mostra a tela de login
+2.  gerente coloca a senha
+3.  sistema verifica se esta no banco
+4.  libera o acesso
+
+@startuml
+start
+:Abre login;
+:Gerente digita as info;
+if (Ta certo?) then (sim)
+  :Libera o acesso de boa;
+else (nao)
+  :Da erro de senha incoreta;
+endif
+stop
+@enduml
